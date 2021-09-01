@@ -1,0 +1,15 @@
+# general
+node_modules/
+build/
+dist/
+tmp/
+temp/
+
+# folder for containerized pg to store data so you don't lose data between container restarts
+tmpdata/
+
+# dotenv environment variables file
+.env
+.env.test
+.env.development
+.env.production

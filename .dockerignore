@@ -1,0 +1,29 @@
+#inclusion of these wld mean each time they change, docker would redo the copy step
+.dockerignore
+docker-compose.yml
+
+# Env secrets should be passed in to the execution environment, and .git should never be exposed (also adds bloat and build time)
+.env
+.env.*
+.git
+
+# the docker container that we deploy should not have revelatory test scripts kicking about
+test/
+src/test/
+**/*.spec.*
+**/*.test.*
+
+## ignore node_modules at any depth
+**/node_modules/
+npm-debug.log
+
+# overheads
+.gitignore
+.cache
+.DS_Store
+.thumbsdb 
+dist/
+_unused/
+.vscode/
+**/*.md
+**/.git

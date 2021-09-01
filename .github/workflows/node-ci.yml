@@ -1,0 +1,46 @@
+name: Install, build and test
+on: 
+  push: 
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+    
+jobs:
+  ci-checks:
+    runs-on: "ubuntu-latest"
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          # throwaway creds for pipeline only
+          POSTGRES_DB: cipg_db
+          POSTGRES_USER: cipg_user
+          POSTGRES_PASSWORD: cipg_pass
+        ports:
+          - 5432:5432
+    env:
+      # throwaway creds for pipeline only
+      NODE_ENV: test
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USER: cipg_user
+      DB_PASS: cipg_pass
+      DB_NAME: cipg_db
+      PORT: 3000
+      SECRET_KEY: blahblah
+      CORS_ORIGIN: true
+      CORS_CREDENTIALS: true
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Wait for postgres
+        run: chmod +x ./scripts/ci-wait-for-pg.sh && ./scripts/ci-wait-for-pg.sh
+      - name: Run tests
+        run: npm run test
