@@ -32,6 +32,7 @@
       "dotenv": "^10.0.0",
       "envalid": "^7.1.1",
       "express": "^4.17.1",
+      "express-handlebars": "^5.3.3",
       "faker": "^5.5.3",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.10",
@@ -43,7 +44,7 @@
       "up": "docker-compose up -d",
       "up:rebuild": "docker-compose up --build -d",
       "down": "docker-compose down",
-      "dev": "cross-env NODE_ENV=development nodemon",
+      "dev": "cross-env NODE_ENV=development DEBUG=express:* nodemon",
       "test": "jest",
       "dckr:build": "docker build -t idbl .",
       "dckr:run": "docker run -d -t -p 3000:3000 --name idbl --env-file .env idbl"
