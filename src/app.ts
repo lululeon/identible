@@ -4,6 +4,7 @@ import path from 'path'
 import { Server as HTTPServer } from 'http'
 import { Connection } from 'typeorm'
 import express, { Request, Response, NextFunction, Application } from 'express'
+import xhbs from 'express-handlebars'
 import cors from 'cors'
 import Routes from './routes'
 import { connectToDB } from '@utils/database'
@@ -21,7 +22,10 @@ class App {
     )
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
-    this.app.use('/public', express.static(path.join(__dirname, 'public')))
+    this.app.use(express.static(path.join(__dirname, 'static')))
+    this.app.engine('handlebars', xhbs())
+    this.app.set('view engine', 'handlebars')
+    this.app.set('views', path.join(__dirname, 'views'))
 
     // register express routes from defined application routes, e.g. app.post('/api/foo', (req,res,next) => {}))
     Routes.forEach(route => {
@@ -45,7 +49,9 @@ class App {
 
     // just stub web route for now
     this.app.get('/', (_req: Request, res: Response, _next: NextFunction) => {
-      res.send('<h1>Well hello there, buddy.</h1>')
+      res.render('home', {
+        title: 'Identible',
+      })
     })
   }
 
