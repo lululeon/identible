@@ -12,4 +12,9 @@
 ## dockerized app
 1. Run `npm run dckr:build` to build the standalone dockerized app*.
 1. Run `npm run dckr:run` to run the container
+
     <small>_*Note: if you make your dockerized pg use a folder **inside** the project as a data store, it will automatically strip readable permissions from that folder, and the docker build process will fail when it encounters a non-readable entry while scanning for files (yes, even if the file is listed in .dockerignore). Put your data folder outside the project entirely, or be prepared to `sudo chmod g+r` on it each time you run the docker build command._</small>
+
+# test integration with proxy server:
+1. ensure the nginx proxy server image is built
+1. `npm run up:proxy` ... test your proxy endpoint!

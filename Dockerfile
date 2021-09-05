@@ -2,12 +2,12 @@ FROM node:14-stretch
 
 # Create app directory
 RUN mkdir -p /usr/src/identible
-
-# ensure the 'node' user (see further down) can write to it
 RUN chown node /usr/src/identible
-
-# make app dir the current working dir
 WORKDIR /usr/src/identible
+
+# for mountable static assets
+RUN mkdir -p /vol/web
+RUN chmod 755 /vol/web
 
 # Install app dependencies (following command presumes a robust .dockerignore file is in place!)
 COPY package*.json ./

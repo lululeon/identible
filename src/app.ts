@@ -22,7 +22,7 @@ class App {
     )
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
-    this.app.use(express.static(path.join(__dirname, 'static')))
+    this.app.use(express.static(env.STATICSDIR))
     this.app.engine('handlebars', xhbs())
     this.app.set('view engine', 'handlebars')
     this.app.set('views', path.join(__dirname, 'views'))
