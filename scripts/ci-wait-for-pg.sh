@@ -1,7 +1,8 @@
 #! /bin/bash
 
-dbhost=localhost
-dbport=5432
+# use available env vars, else set defaults:
+dbhost="${DB_HOST:=localhost}"
+dbport="${DB_PORT:=5432}"
 
 echo "checking if postgres in CI runner is up at ${dbhost}:${dbport}..."
 

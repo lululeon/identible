@@ -1,6 +1,5 @@
 import dotenv from 'dotenv'
 dotenv.config()
-
 import { cleanEnv, str, host, port, bool } from 'envalid'
 
 const env = cleanEnv(process.env, {
@@ -14,6 +13,7 @@ const env = cleanEnv(process.env, {
   SECRET_KEY: str(),
   CORS_ORIGIN: str(),
   CORS_CREDENTIALS: bool(),
+  STATICSDIR: str(),
 
   // database
   DB_HOST: host({ devDefault: 'localhost' }),
@@ -22,5 +22,7 @@ const env = cleanEnv(process.env, {
   DB_USER: str(),
   DB_PASS: str(),
 })
+
+env.STATICSDIR
 
 export default env

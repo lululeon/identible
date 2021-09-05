@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+  proxy:
+    image: proxy:latest
+    container_name: proxy
+    ports:
+      - '8080:8080'
+    volumes:
+      - ${SHARED_VOLUME}:/vol/static
+    environment:
+      LISTEN_PORT: 8080
+      APP_HOST: idbl
+      APP_PORT: ${PORT}
+    networks:
+      - backend
+    depends_on: 
+      - app
+  app:
+    build:
+      context: .
+    container_name: idbl
+    env_file:
+      - .env
+    environment:
+      DB_HOST: 'pg'
+      DB_PORT: 5432
+      STATICSDIR: '/vol/web'
+    volumes:
+      - ${SHARED_VOLUME}:/vol/web
+    networks:
+      - backend
+    depends_on: 
+      - pg
+  pg:
+    image: postgres:12
+    container_name: pg-container
+    volumes:
+      - ${DB_VOLUME}:/var/lib/postgresql/data
+    ports:
+      - '${DB_PORT}:5432'
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

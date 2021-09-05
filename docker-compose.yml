@@ -5,7 +5,7 @@ services:
     image: postgres:12
     container_name: pg-container
     volumes:
-    - ${DB_DATAPATH}:/var/lib/postgresql/data
+      - ${DB_VOLUME}:/var/lib/postgresql/data
     ports:
       - '${DB_PORT}:5432'
     environment:
@@ -18,7 +18,3 @@ services:
 networks:
   backend:
     driver: bridge
-
-volumes:
-  data:
-    driver: local
