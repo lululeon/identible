@@ -9,4 +9,4 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Destroy Infra! Mwahahaha!!! Yes, Livin' dangerously. Very dangerously indeed :)
-        run: "todo - destroy"
+        run: echo "todo - destroy!"
