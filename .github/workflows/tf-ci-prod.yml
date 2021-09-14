@@ -1,0 +1,20 @@
+name: Terraform workflow
+on: 
+  push: 
+    branches:
+      - prod
+jobs:
+  prod-deploy:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Test & Lint
+        run: echo "todo - test and lint"
+
+      - name: Build & Push
+        run: echo "todo - build and push"
+
+      - name: Terraform Plan
+        run: echo "todo - terraform plan"
+
+      - name: Terraform Apply
+        run: echo "todo - terraform apply"

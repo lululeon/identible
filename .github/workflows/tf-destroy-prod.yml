@@ -1,0 +1,12 @@
+name: Terraform Destroy for Prod
+
+# manual trigger
+on: 
+  workflow_dispatch
+
+jobs:
+  prod-destroy:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Destroy Infra! Mwahahaha!!! Yes, Livin' dangerously. Very dangerously indeed :)
+        run: echo "todo - destroy!"
