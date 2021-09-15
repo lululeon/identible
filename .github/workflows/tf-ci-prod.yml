@@ -1,8 +1,17 @@
 name: Terraform workflow
-on: 
-  push: 
-    branches:
-      - prod
+
+# tags =/= releases! But releases will create tags and we don't want duplicate triggering.
+# on: 
+#   push: 
+#     branches:
+#       - main
+#     tags:
+#     - 'release*'
+
+on:
+  release:
+    types: [published]
+
 jobs:
   prod-deploy:
     runs-on: "ubuntu-latest"
