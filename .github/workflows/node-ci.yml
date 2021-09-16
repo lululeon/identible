@@ -3,8 +3,12 @@ on:
   push: 
     branches:
       - main
+    paths-ignore:
+      - 'deploy/**'
   pull_request:
     types: [opened, synchronize]
+    paths-ignore:
+    - 'deploy/**'
     
 jobs:
   ci-checks:
