@@ -1,4 +1,6 @@
 terraform {
+  required_version = "~> 1.0.7"
+
   # see: https://www.terraform.io/docs/language/settings/backends/s3.html
   backend "s3" {
     # i.e. bucket name:
@@ -9,11 +11,17 @@ terraform {
     encrypt        = true
     dynamodb_table = "ntm-idbl-tfstate-lockdb"
   }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+  }
 }
 
 provider "aws" {
-  region  = "us-east-1"
-  version = "~> 2.54.0"
+  region = "us-east-1"
 }
 
 locals {

@@ -5,6 +5,12 @@ Using docker has the advantages:
 
 So:
 - `aws-vault exec <user>`
-- `docker-compose -f deploy/docker-compose.yml run --rm terraform init`
+- `docker-compose -f deploy/docker-compose.yml run --rm terraform init` etc.
 
-In future might look at tfenv, tfswitch etc.
+Or running with local terraform
+`terraform -chdir=deploy init`
+`terraform -chdir=deploy fmt`
+`terraform -chdir=deploy validate`
+`terraform -chdir=deploy plan`
+`terraform -chdir=deploy apply`
+`terraform -chdir=deploy destroy`

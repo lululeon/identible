@@ -16,14 +16,27 @@ jobs:
   prod-deploy:
     runs-on: "ubuntu-latest"
     steps:
-      - name: Test & Lint
-        run: echo "todo - test and lint"
+      - uses: actions/checkout@v2
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.7
 
-      - name: Build & Push
-        run: echo "todo - build and push"
+      - name: Format
+        id: fmt
+        run: terraform -chdir=deploy fmt -check
+        continue-on-error: true
 
-      - name: Terraform Plan
+      - name: Init
+        id: init
+        run: terraform -chdir=deploy init
+
+      - name: Validate
+        id: validate
+        run: terraform -chdir=deploy validate -no-color
+
+
+      - name: Plan
         run: echo "todo - terraform plan"
 
-      - name: Terraform Apply
+      - name: Apply
         run: echo "todo - terraform apply"

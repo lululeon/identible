@@ -1,0 +1,27 @@
+name: Tf Sanity checks
+
+# manual trigger
+on: 
+  workflow_dispatch
+
+jobs:
+  sanity-checks:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.7
+
+      - name: Format
+        id: fmt
+        run: terraform -chdir=deploy fmt -check
+        continue-on-error: true
+
+      - name: Init
+        id: init
+        run: terraform -chdir=deploy init
+
+      - name: Validate
+        id: validate
+        run: terraform -chdir=deploy validate -no-color
