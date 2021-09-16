@@ -23,20 +23,20 @@ jobs:
 
       - name: Format
         id: fmt
-        run: terraform fmt -check
+        run: terraform -chdir=deploy fmt -check
         continue-on-error: true
 
       - name: Init
         id: init
-        run: terraform init
+        run: terraform -chdir=deploy init
 
       - name: Validate
         id: validate
-        run: terraform validate -no-color
+        run: terraform -chdir=deploy validate -no-color
 
 
-      - name: Terraform Plan
+      - name: Plan
         run: echo "todo - terraform plan"
 
-      - name: Terraform Apply
+      - name: Apply
         run: echo "todo - terraform apply"
