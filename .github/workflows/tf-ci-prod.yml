@@ -46,9 +46,11 @@ jobs:
         id: tagger
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
-      - name: Build Image & Push
+      - name: ECR Login
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Image & Push
         env:
           # not relying on step outputs in this case; supplying full uri directly
           # ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
