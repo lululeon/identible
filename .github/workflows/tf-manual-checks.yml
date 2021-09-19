@@ -29,7 +29,6 @@ jobs:
         id: init
         run: terraform -chdir=deploy init
 
-
       - name: Validate
         id: validate
         run: terraform -chdir=deploy validate -no-color

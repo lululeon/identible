@@ -26,6 +26,13 @@ jobs:
         run: terraform -chdir=deploy fmt -check
         continue-on-error: true
 
+      - name: Configure AWS Creds
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.TFUSER_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.TFUSER_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
       - name: Init
         id: init
         run: terraform -chdir=deploy init
@@ -34,9 +41,34 @@ jobs:
         id: validate
         run: terraform -chdir=deploy validate -no-color
 
+      # full github.sha string is too long for our needs
+      - name: Compute short sha for docker image tag
+        id: tagger
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
-      - name: Plan
-        run: echo "todo - terraform plan"
+      - name: ECR Login
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Apply
-        run: echo "todo - terraform apply"
+      - name: Build Image & Push
+        env:
+          # not relying on step outputs in this case; supplying full uri directly
+          # ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          # ECR_REPOSITORY: repo-name
+          IMAGE_TAG: ${{ steps.tagger.outputs.sha_short }}
+          REPO_URI: ${{ secrets.ECR_REPO }}
+        run: |
+          docker build --compress -t $REPO_URI:$IMAGE_TAG .
+          docker push $REPO_URI:$IMAGE_TAG
+          docker tag $REPO_URI:$IMAGE_TAG $REPO_URI:latest
+          docker push $REPO_URI:latest
+
+      - name: Terraform Plan
+        run: |
+          terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
+          terraform -chdir=deploy plan
+
+      - name: Terraform Apply
+        run: |
+          terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
+          terraform -chdir=deploy apply
