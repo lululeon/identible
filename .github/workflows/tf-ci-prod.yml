@@ -63,8 +63,12 @@ jobs:
           docker tag $REPO_URI:$IMAGE_TAG $REPO_URI:latest
           docker push $REPO_URI:latest
 
-      - name: Plan
-        run: echo "todo - terraform plan"
+      - name: Terraform Plan
+        run: |
+          terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
+          terraform -chdir=deploy plan
 
-      - name: Apply
-        run: echo "todo - terraform apply"
+      - name: Terraform Apply
+        run: |
+          terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
+          terraform -chdir=deploy apply
