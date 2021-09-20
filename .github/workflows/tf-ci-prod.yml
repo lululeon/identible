@@ -8,9 +8,10 @@ name: Terraform workflow
 #     tags:
 #     - 'release*'
 
+# Not using 'published'. For now, on deploy success, then manually publish release.
 on:
   release:
-    types: [published]
+    types: [created]
 
 jobs:
   prod-deploy:
