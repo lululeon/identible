@@ -20,7 +20,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.TFUSER_AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Init
+        id: init
+        run: terraform -chdir=deploy init
+
       - name: Terraform Destroy
         run: |
-          terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
+          terraform -chdir=deploy workspace select prod 
           terraform -chdir=deploy destroy
