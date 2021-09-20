@@ -5,8 +5,8 @@ terraform {
   backend "s3" {
     # i.e. bucket name:
     bucket = "ntm.idbl.tfstate-bucket"
-    # i.e. "folder" within bucket:
-    key            = "idbl-state"
+    # i.e. "folder" within bucket. Prefix according to the workspace in use! in this case: env:/prod/
+    key            = "env:/prod/idbl-state"
     region         = "us-east-1"
     encrypt        = true
     dynamodb_table = "ntm-idbl-tfstate-lockdb"

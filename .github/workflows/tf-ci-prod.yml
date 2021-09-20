@@ -72,4 +72,5 @@ jobs:
       - name: Terraform Apply
         run: |
           terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
-          terraform -chdir=deploy apply
+          terraform -chdir=deploy apply -auto-approve
+
