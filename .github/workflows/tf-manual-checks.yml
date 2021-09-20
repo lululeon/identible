@@ -24,16 +24,19 @@ jobs:
           aws-access-key-id: ${{ secrets.TFUSER_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.TFUSER_AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-
-      - name: Init
-        id: init
-        run: terraform -chdir=deploy init
-
-      - name: Validate
-        id: validate
-        run: terraform -chdir=deploy validate -no-color
       
-      - name: Terraform Plan
-        run: |
-          terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
-          terraform -chdir=deploy plan
+      - name: temp creds test
+        run: aws ec2 describe-instances
+
+      # - name: Init
+      #   id: init
+      #   run: terraform -chdir=deploy init
+
+      # - name: Validate
+      #   id: validate
+      #   run: terraform -chdir=deploy validate -no-color
+      
+      # - name: Terraform Plan
+      #   run: |
+      #     terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
+      #     terraform -chdir=deploy plan

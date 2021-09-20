@@ -5,10 +5,14 @@ on:
       - main
     paths-ignore:
       - 'deploy/**'
+      - '.github/workflows/tf-*.yml'
+      - README.md
   pull_request:
     types: [opened, synchronize]
     paths-ignore:
     - 'deploy/**'
+    - '.github/workflows/tf-*.yml'
+    - README.md
     
 jobs:
   ci-checks:
