@@ -28,9 +28,9 @@ jobs:
       # - name: temp creds test
       #   run: aws ec2 describe-instances
 
-      # - name: Init
-      #   id: init
-      #   run: terraform -chdir=deploy init
+      - name: Init
+        id: init
+        run: terraform -chdir=deploy init
 
       # - name: Validate
       #   id: validate
