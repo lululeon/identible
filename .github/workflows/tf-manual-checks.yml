@@ -25,8 +25,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.TFUSER_AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       
-      - name: temp creds test
-        run: aws ec2 describe-instances
+      # - name: temp creds test
+      #   run: aws ec2 describe-instances
 
       # - name: Init
       #   id: init
@@ -36,7 +36,7 @@ jobs:
       #   id: validate
       #   run: terraform -chdir=deploy validate -no-color
       
-      # - name: Terraform Plan
-      #   run: |
-      #     terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
-      #     terraform -chdir=deploy plan
+      - name: Terraform Plan
+        run: |
+          terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
+          terraform -chdir=deploy plan
