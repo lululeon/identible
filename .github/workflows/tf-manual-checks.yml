@@ -32,3 +32,8 @@ jobs:
       - name: Validate
         id: validate
         run: terraform -chdir=deploy validate -no-color
+      
+      - name: Terraform Plan
+        run: |
+          terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
+          terraform -chdir=deploy plan
