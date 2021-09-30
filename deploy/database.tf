@@ -52,6 +52,8 @@ resource "aws_db_instance" "main" {
   engine_version = "12.7"
 
   instance_class = "db.t2.micro"
+
+  # populated by either 1) prompt at runtime, or 2) 'terraform.tfvars' file, or 3) env vars TF_VAR_<varname>
   username       = var.db_username
   password       = var.db_password
 
