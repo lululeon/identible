@@ -1,4 +1,4 @@
-name: Terraform Destroy for Prod
+name: PROD Destroy 💣
 
 # manual trigger
 on: 

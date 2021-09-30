@@ -1,0 +1,13 @@
+name: Manual Tests 🧪
+
+# manual trigger
+on: 
+  workflow_dispatch
+
+jobs:
+  sanity-checks:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Quick Manual Tester
+        run: echo "add jobs here for rapid testing!"
+
