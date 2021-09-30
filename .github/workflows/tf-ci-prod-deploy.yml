@@ -1,4 +1,4 @@
-name: Terraform workflow
+name: Terraform Prod Deploy
 
 # tags =/= releases! But releases will create tags and we don't want duplicate triggering.
 # on: 
