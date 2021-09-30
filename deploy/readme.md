@@ -8,9 +8,11 @@ So:
 - `docker-compose -f deploy/docker-compose.yml run --rm terraform init` etc.
 
 Or running with local terraform
-`terraform -chdir=deploy init`
-`terraform -chdir=deploy fmt`
-`terraform -chdir=deploy validate`
-`terraform -chdir=deploy plan`
-`terraform -chdir=deploy apply`
-`terraform -chdir=deploy destroy`
+- `terraform -chdir=deploy init`
+- `terraform -chdir=deploy fmt`
+- `terraform -chdir=deploy validate`
+- `terraform -chdir=deploy plan`
+- `terraform -chdir=deploy apply`
+- `terraform -chdir=deploy destroy`
+
+Lastly, if you want to deploy locally, copy `sample.tfvars` -> `terraform.tfvars`. Do **NOT** check in the latter!
