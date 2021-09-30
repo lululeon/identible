@@ -1,4 +1,4 @@
-name: Tf Sanity checks
+name: Manual Tests 🧪
 
 # manual trigger
 on: 
@@ -10,3 +10,4 @@ jobs:
     steps:
       - name: Quick Manual Tester
         run: echo "add jobs here for rapid testing!"
+
