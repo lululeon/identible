@@ -8,10 +8,10 @@ name: Terraform workflow
 #     tags:
 #     - 'release*'
 
-# Not using 'published'. For now, on deploy success, then manually publish release.
+# Not using 'published'. For now, publish with "pre-release". On deploy success, then manually publish release.
 on:
   release:
-    types: [created]
+    types: [created, edited]
 
 jobs:
   prod-deploy:
