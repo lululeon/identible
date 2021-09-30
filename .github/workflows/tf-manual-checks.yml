@@ -45,7 +45,7 @@ jobs:
           db_password = "${{ secrets.TF_VAR_db_password }}"
           EOF
           terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
-          terraform -chdir=deploy plan -var-file=pipeline.auto.tfvars
+          terraform -chdir=deploy plan -var-file=../pipeline.auto.tfvars
 
       - name: Terraform Apply
         run: |
@@ -54,5 +54,5 @@ jobs:
           db_password = "${{ secrets.TF_VAR_db_password }}"
           EOF
           terraform -chdir=deploy workspace select prod || terraform -chdir=deploy workspace new prod 
-          terraform -chdir=deploy apply -auto-approve -var-file=pipeline.auto.tfvars
+          terraform -chdir=deploy apply -auto-approve -var-file=../pipeline.auto.tfvars
 
