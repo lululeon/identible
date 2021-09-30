@@ -26,5 +26,9 @@ jobs:
 
       - name: Terraform Destroy
         run: |
+          cat > pipeline.auto.tfvars <<EOF
+          db_username = "${{ secrets.TF_VAR_db_username }}"
+          db_password = "${{ secrets.TF_VAR_db_password }}"
+          EOF
           terraform -chdir=deploy workspace select prod 
-          terraform -chdir=deploy destroy -auto-approve
+          terraform -chdir=deploy destroy -auto-approve -var-file=../pipeline.auto.tfvars
