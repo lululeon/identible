@@ -13,3 +13,7 @@ variable "db_username" {
 variable "db_password" {
   description = "Database password for RDS instance"
 }
+
+variable "bastion_key_name" {
+  description = "ops-admin"
+}
